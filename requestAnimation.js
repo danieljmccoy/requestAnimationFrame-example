@@ -34,6 +34,7 @@ requestAnimationFrame(mainLoop);
 
 // example two
 let globalID;
+let clicked = true;
 let body = document.querySelector("body");
 let stop = document.querySelector("#stop");
 let start = document.querySelector("#start");
@@ -44,12 +45,14 @@ function repeatOften() {
   globalID = requestAnimationFrame(repeatOften);
 }
 
-globalID = requestAnimationFrame(repeatOften);
+start.addEventListener("click", function(){
+  if(clicked)
+  globalID = requestAnimationFrame(repeatOften);
+  clicked = false;
+});
 
 stop.addEventListener("click", function(){
+    if(!clicked)
     cancelAnimationFrame(globalID);
+    clicked = true;
 })
-
-start.addEventListener("click", function(){
-  globalID = requestAnimationFrame(repeatOften);
-});
